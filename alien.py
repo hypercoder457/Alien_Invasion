@@ -3,9 +3,10 @@ import pygame
 
 from pygame.sprite import Sprite
 
+
 class Alien(Sprite):
     """A class to represent a single alien in the fleet."""
-    
+
     def __init__(self, ai_game):
         """Initialize the alien & set it's starting position."""
         super().__init__()
@@ -25,9 +26,9 @@ class Alien(Sprite):
 
     def update(self) -> None:
         """Move the alien right or left."""
-        self.x += (self.settings.alien_speed * 
-        self.settings.fleet_direction)
-        
+        self.x += (self.settings.alien_speed *
+                   self.settings.fleet_direction)
+
         self.rect.x = self.x
 
     def check_edges(self) -> Union[bool, None]:

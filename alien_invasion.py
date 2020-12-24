@@ -3,21 +3,22 @@ from time import sleep
 
 import pygame
 
-from settings import Settings
-from game_stats import GameStats
-from scoreboard import Scoreboard
-from button import Button
-from ship import Ship
+from .settings import Settings
+from .game_stats import GameStats
+from .scoreboard import Scoreboard
+from .button import Button
+from .ship import Ship
 
 
-
-from bullet import Bullet
-from alien import Alien
+from .bullet import Bullet
+from .alien import Alien
 
 import pygame.mouse
 
+
 class AlienInvasion:
     """ Overall class to manage game assets & behavior."""
+
     def __init__(self):
         pygame.init()
         self.settings = Settings()
@@ -99,12 +100,11 @@ class AlienInvasion:
         # If so, get rid of the bullet & hit the alien.
         self._check_bullet_alien_collsions()
 
-
-
     def _check_bullet_alien_collsions(self):
         """Respond to bullet-alien collisions."""
         # Remove any bullets & aliens that have collided.
-        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, False, True)
+        collisions = pygame.sprite.groupcollide(
+            self.bullets, self.aliens, False, True)
 
         if collisions:
             for aliens in collisions.values():
@@ -116,8 +116,6 @@ class AlienInvasion:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
-
-            
 
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
@@ -146,13 +144,13 @@ class AlienInvasion:
 
         # Determine the number of rows for aliens that fit on the screen.
         ship_height = self.ship.rect.height
-        available_space_y = (self.settings.screen_height - (3 * alien_height) - ship_height)
+        available_space_y = (self.settings.screen_height -
+                             (3 * alien_height) - ship_height)
         number_rows = available_space_y // (2 * alien_height)
         # Create the first row of aliens.
         for row_number in range(number_rows):
             for alien_number in range(number_aliens_x):
                 self._create_alien(alien_number, row_number)
-
 
     def _create_alien(self, alien_number, row_number):
         """Create an alien & place it in the row."""
@@ -246,7 +244,6 @@ class AlienInvasion:
 
             # Hide the mouse cursor.
             pygame.mouse.set_visible(False)
-
 
 
 if __name__ == '__main__':

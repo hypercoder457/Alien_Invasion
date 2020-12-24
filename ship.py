@@ -1,6 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 
+
 class Ship(Sprite):
     def __init__(self, ai_game):
         """Initialize the ship & set it's starting position."""
@@ -23,8 +24,8 @@ class Ship(Sprite):
 
         if self.moving_left and self.rect.left > 0:
             self.x -= self.settings.ship_speed
-        self.rect.x = self.x    
-        
+        self.rect.x = self.x
+
     def blitme(self) -> None:
         self.screen.blit(self.image, self.rect)
 
